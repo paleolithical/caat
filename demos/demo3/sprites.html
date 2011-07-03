@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>CAAT example: Sprites across a path</title>
+
+    <link rel="stylesheet" href="../style/demo.css">
+
+</head>
+<body>
+
+    <div id="page">
+        <div id="header">
+            <div style="text-align: center;">
+
+            </div>
+        </div>
+
+        <div id="content">
+            <div id="menu">
+                <h1>Demos</h1>
+                <ul>
+                    <li><a href="../demo1/path.html">Path Management</a></li>
+                    <li><a href="../demo2/fishpond.html">Fish Pond</a></li>
+                    <li><a href="../demo3/sprites.html">Sprites on Path</a></li>
+                    <li><a href="../demo4/coordinates.html">Coordinates</a></li>
+                    <li><a href="../demo5/text-on-path.html">Text on Path</a></li>
+                </ul>
+                <h1>Tutorial</h1>
+                <ul>
+                    <li>Getting Started</li>
+                </ul>
+            </div>
+            <div id="experiment">
+                <div style="text-align:center">
+                    <h1>Sprites on Path</h1>
+                </div>
+                <div id="experiment-holder">
+                </div>
+                <div id="experiment-description">
+                    <div>
+                        <p>Controls:</p>
+                        <ul>
+                            <li>Click on screen to add more sprites.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p>
+                            This demo features the following elements:
+                        </p>
+                        <ul>
+                            <li>Path Behaviors.</li>
+                            <li>Path Behavior lifecycle.</li>
+                            <li>CompoundImage management.</li>
+                            <li>SpriteActor definition.</li>
+                            <li>Dynamic sprite addition to the scene.</li>
+                            <li>Gradient optimization by caching it as bitmap.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<script type="text/javascript" src="../../lib/caat.js"></script>
+<script type="text/javascript" src="../../templates/startup-wo-splash/template.js"></script>
+<script type="text/javascript">
+    (function() {
+        /**
+         * Startup it all up when the document is ready.
+         * Change for your favorite frameworks initialization code.
+         */
+        window.addEventListener(
+                'load',
+                function() {
+                    CAAT.modules.initialization.init(
+                            800, 500,
+                            'experiment-holder',
+                            [
+                                {id:'fish',     url:'../demo-resources/img/anim1.png'},
+                                {id:'fish2',    url:'../demo-resources/img/anim2.png'},
+                                {id:'fish3',    url:'../demo-resources/img/anim3.png'},
+                                {id:'fish4',    url:'../demo-resources/img/anim4.png'}
+                            ],
+                            sprites
+                            );
+                },
+                false);
+
+        function sprites(director) {
+
+            var scene= director.createScene();
+            var imageIndex=0;
+            var conpoundimagefish = [];
+            conpoundimagefish.push(
+                    new CAAT.CompoundImage().initialize(
+                            director.getImage('fish'),  1, 3) );
+            conpoundimagefish.push(
+                    new CAAT.CompoundImage().initialize(
+                            director.getImage('fish2'), 1, 3) );
+            conpoundimagefish.push(
+                    new CAAT.CompoundImage().initialize(
+                            director.getImage('fish3'), 1, 3) );
+            conpoundimagefish.push(
+                    new CAAT.CompoundImage().initialize(
+                            director.getImage('fish4'), 1, 3) );
+
+            function addFish(x,y) {
+
+                var scale= Math.random()*1+.5;
+
+                var fish = new CAAT.SpriteActor().
+                        setAnimationImageIndex( [0,1,2,1] ).
+                        setSpriteImage(conpoundimagefish[(imageIndex++)%conpoundimagefish.length]).
+                        setLocation( x,y ).
+                        setScale( scale,scale ).
+                        setChangeFPS(300).
+                        enableEvents(false);
+
+                scene.addChild(fish);
+
+                var pbfish= new CAAT.PathBehavior().
+                        setAutoRotate(true).
+                        setPath(
+                            new CAAT.Path().setLinear( x,y, x,y ) ).
+                        setInterpolator(
+                            new CAAT.Interpolator().createExponentialInOutInterpolator(2,false) ).
+                        setFrameTime( scene.time, 10 ).
+                        addListener( {
+                            behaviorExpired : function(behaviour,time) {
+                                var endCoord= behaviour.path.endCurvePosition();
+                                behaviour.setPath(
+                                        new CAAT.Path().setCubic(
+                                            endCoord.x,
+                                            endCoord.y,
+                                            Math.random()*director.width,
+                                            Math.random()*director.height,
+                                            Math.random()*director.width,
+                                            Math.random()*director.height,
+                                            Math.random()*director.width,
+                                            Math.random()*director.height) );
+                                behaviour.setFrameTime( scene.time, 3000+Math.random()*3000 );
+                            }
+                        });
+
+                fish.addBehavior( pbfish );
+            }
+
+            var gradient= director.crc.createLinearGradient(0,0,director.width,director.height);
+            gradient.addColorStop(0,'#000000');
+            gradient.addColorStop(1,'#00007f');
+
+            var gr= new CAAT.ActorContainer().
+                    setBounds(0,0,director.width,director.height).
+                    setFillStyle(gradient).
+                    enableEvents(false);
+
+            var ac= new CAAT.ImageActor().create().
+                    setImage( gr.cacheAsBitmap(0) );
+
+            scene.addChild(ac);
+
+            ac.enableEvents(true);
+            ac.mouseClick= function(ev) {
+                addFish(ev.point.x,ev.point.y);
+            };
+
+            addFish(100,100);
+        }
+
+
+    })();
+</script>
+</html>
