@@ -25,6 +25,7 @@
                 <li><a href="../demo3/sprites.html">Sprites on Path</a></li>
                 <li><a href="../demo4/coordinates.html">Coordinates</a></li>
                 <li><a href="../demo5/text-on-path.html">Text on Path</a></li>
+                <li><a href="../demo6/accelerometer.html">Accelerometer</a></li>
             </ul>
             <h1>Tutorial</h1>
             <ul>
@@ -47,6 +48,7 @@
                         <li>Path Behavior lifecycle.</li>
                         <li>Gradient optimization by caching it as bitmap.</li>
                         <li>Generating procedural Actors</li>
+                        <li>Avoid erasing the background since it's going to be overwritten by the background.</li>
                     </ul>
                 </div>
             </div>
@@ -107,6 +109,12 @@
         function __fishpond(director) {
 
             var scene= director.createScene();
+
+            // when the scene is activated, avoid the director clearing the viewport since it'll be
+            // totally erased by the background.
+            scene.activated= function() {
+                director.setClear(false);
+            }
             var NP=20;
             var colors= ['red', 'blue', 'white', 'rgb(0,255,255)', 'yellow'];
             var gradient= director.crc.createLinearGradient(0,0,director.width,director.height);

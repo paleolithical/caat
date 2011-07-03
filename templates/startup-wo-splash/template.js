@@ -77,6 +77,7 @@ CAAT.modules.initialization.init= function( width, height, runHere, imagesURL, o
 
                 onEndLoading(director);
 
+                CAAT.loop(60);
                 /**
                  * Change this sentence's parameters to play with different entering-scene
                  * curtains.
@@ -90,7 +91,7 @@ CAAT.modules.initialization.init= function( width, height, runHere, imagesURL, o
                         CAAT.Actor.prototype.ANCHOR_CENTER,
                         new CAAT.Interpolator().createElasticOutInterpolator(2.5, .4) );
 
-                CAAT.loop(60);
+
 
             }
         }
