@@ -62,16 +62,22 @@ h1 {
 }
 
 #menu ul {
-    padding: 10px 0 !important;
+    padding: 4px 0 !important;
     overflow: hidden;
     margin: 0;
 }
 
 #menu li {
-    text-indent: 3px;
-    margin-left: 0.5em;
+    text-indent: 0px;
+    margin-left: 0;
 }
 
 a {
     text-decoration: none;
+    color: #55f;
+}
+
+a:hover {
+    background: #55f;
+    color: #fff;
 }
