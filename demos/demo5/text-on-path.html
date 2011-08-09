@@ -168,7 +168,6 @@
                 setTextBaseline("bottom").
                 setPath(
                     p,
-                    //new CAAT.Interpolator().createBounceInOutInterpolator(),
                     new CAAT.Interpolator().createLinearInterpolator(false),
                     30000);
             scene.addChild(text);
@@ -203,15 +202,14 @@
             var rb = new CAAT.RotateBehavior().
                     setCycle(true).
                     setFrameTime(0, 4000).
-                    setValues( -Math.PI / 8, Math.PI / 8 ).
+                    setValues( -Math.PI / 8, Math.PI / 8, 50, 0 ).
                     setInterpolator(
                             new CAAT.Interpolator().createCubicBezierInterpolator(
                                     {x:0,y:0},
                                     {x:1,y:0},
                                     {x:0,y:1},
                                     {x:1,y:1},
-                                    true)).
-                    setAnchor( CAAT.Actor.prototype.ANCHOR_TOP );
+                                    true))
             cc1.addBehavior(rb);
 
             var gradient = director.crc.createLinearGradient(0, 0, 0, 30);
@@ -225,13 +223,9 @@
                     calcTextSize(director).
                     setTextAlign("center").
                     setFillStyle(gradient).
-                    setOutline(true);
-            text.setLocation((cc1.width - text.width) / 2, 0);
-            var aimg = new CAAT.ImageActor().create().
-                    setImage(text.cacheAsBitmap()).
-                    setLocation((cc1.width - text.textWidth) / 2, 0);
-            cc1.addChild(aimg);
-
+                    setOutline(true).
+                    cacheAsBitmap();
+            cc1.addChild(text.setLocation((cc1.width - text.width) / 2, 0));
 
             var text2 = new CAAT.TextActor().
                     setFont("40px sans-serif").
@@ -239,13 +233,9 @@
                     setText("Interpolated").
                     calcTextSize(director).
                     setFillStyle(gradient).
-                    setOutline(true);
-            text2.setLocation((cc1.width - text2.width) / 2, 40);
-            var aimg2 = new CAAT.ImageActor().create().
-                    setImage(text2.cacheAsBitmap()).
-                    setLocation((cc1.width - text2.textWidth) / 2, 40);
-            cc1.addChild(aimg2);
-
+                    setOutline(true).
+                    cacheAsBitmap();
+            cc1.addChild(text2.setLocation((cc1.width - text2.width) / 2, 40));
 
             var text4 = new CAAT.TextActor().
                     setFont("40px sans-serif").
@@ -253,12 +243,9 @@
                     setText("As well").
                     calcTextSize(director).
                     setFillStyle(gradient).
-                    setOutline(true);
-            text4.setLocation((cc1.width - text4.width) / 2, 80);
-            var aimg4 = new CAAT.ImageActor().create().
-                    setImage(text4.cacheAsBitmap()).
-                    setLocation((cc1.width - text4.textWidth) / 2, 80);
-            cc1.addChild(aimg4);
+                    setOutline(true).
+                    cacheAsBitmap();
+            cc1.addChild(text4.setLocation((cc1.width - text4.width) / 2, 80));
 
         }
 

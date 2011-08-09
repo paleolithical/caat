@@ -257,5 +257,5 @@
         }
     };
 
-    extend( CAAT.Fish, CAAT.Actor, null );
+    extend( CAAT.Fish, CAAT.Actor );
 })();

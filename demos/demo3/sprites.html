@@ -154,25 +154,27 @@
             var imageIndex=0;
             var conpoundimagefish = [];
             conpoundimagefish.push(
-                    new CAAT.CompoundImage().initialize(
+                    new CAAT.SpriteImage().initialize(
                             director.getImage('fish'),  1, 3) );
             conpoundimagefish.push(
-                    new CAAT.CompoundImage().initialize(
+                    new CAAT.SpriteImage().initialize(
                             director.getImage('fish2'), 1, 3) );
             conpoundimagefish.push(
-                    new CAAT.CompoundImage().initialize(
+                    new CAAT.SpriteImage().initialize(
                             director.getImage('fish3'), 1, 3) );
             conpoundimagefish.push(
-                    new CAAT.CompoundImage().initialize(
+                    new CAAT.SpriteImage().initialize(
                             director.getImage('fish4'), 1, 3) );
 
             function addFish(x,y) {
 
                 var scale= Math.random()*1+.5;
 
-                var fish = new CAAT.SpriteActor().
+                var fish = new CAAT.Actor().
                         setAnimationImageIndex( [0,1,2,1] ).
-                        setSpriteImage(conpoundimagefish[(imageIndex++)%conpoundimagefish.length]).
+                        setBackgroundImage(
+                                conpoundimagefish[(imageIndex++)%conpoundimagefish.length].getRef(),
+                                true).
                         setLocation( x,y ).
                         setScale( scale,scale ).
                         setChangeFPS(300).
@@ -214,15 +216,13 @@
             var gr= new CAAT.ActorContainer().
                     setBounds(0,0,director.width,director.height).
                     setFillStyle(gradient).
-                    enableEvents(false);
+                    enableEvents(false).
+                    cacheAsBitmap();
 
-            var ac= new CAAT.ImageActor().create().
-                    setImage( gr.cacheAsBitmap(0) );
+            scene.addChild(gr);
 
-            scene.addChild(ac);
-
-            ac.enableEvents(true);
-            ac.mouseClick= function(ev) {
+            gr.enableEvents(true);
+            gr.mouseClick= function(ev) {
                 addFish(ev.point.x,ev.point.y);
             };
 

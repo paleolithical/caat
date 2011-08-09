@@ -138,8 +138,8 @@
                 false);
 
         function createStarCache(director, ci) {
-            var actor= new CAAT.SpriteActor().
-                setSpriteImage( ci ).
+            var actor= new CAAT.Actor().
+                setBackgroundImage( ci.getRef(), true ).
                 setSpriteIndex( (Math.random()*6)>>0 ).
                 enableEvents(false).
                 setOutOfFrameTime();
@@ -149,9 +149,9 @@
 
         function behaviors(director) {
             var scene= director.createScene();
-            var ci= new CAAT.CompoundImage().
+            var ci= new CAAT.SpriteImage().
                         initialize(director.getImage('numbers'), 9, 9);
-            var cistars= new CAAT.CompoundImage().
+            var cistars= new CAAT.SpriteImage().
                         initialize(director.getImage('stars'), 1, 6);
 
             var i,j;
@@ -192,12 +192,12 @@
             for( var i=0; i<rows; i++ ) {
                 for( var j=0; j<columns; j++ ) {
 
-                    var number= new CAAT.SpriteActor().
-                            setSpriteImage(ci).
+                    var number= new CAAT.Actor().
+                            setBackgroundImage(ci.getRef(),true).
                             setLocation(
                                 paddingLeft + j*(numberPadding/2+numberW),
                                 paddingTop  + i*(numberPadding/2+numberH)).
-                            setSpriteIndex( (Math.random()*ci.rows*ci.cols)>>0 );
+                            setSpriteIndex( (Math.random()*ci.rows*ci.columns)>>0 );
 
                     number.mouseEnter= function(mouseEvent) {
                         this.parent.setZOrder( this, Number.MAX_VALUE );

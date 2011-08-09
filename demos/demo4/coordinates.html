@@ -287,7 +287,7 @@
                 var mouseMoveHandler= function(mouseEvent) {
                     var actor= mouseEvent.source;
                     actor.__mouseMove(mouseEvent);
-                    // bugbug, subiendo hasta scena
+
                     coords.setText("Local Coord: ("+
                             ((mouseEvent.point.x*100)>>0)/100+","+
                             ((mouseEvent.point.y*100)>>0)/100+")");
@@ -324,15 +324,14 @@
                         new CAAT.RotateBehavior().
                                 setCycle(true).
                                 setFrameTime( 0, 4000 ).
-                                setValues( -Math.PI/8, Math.PI/8 ).
+                                setValues( -Math.PI/8, Math.PI/8, 50, 0 ).  // anchor at 50%, 0%
                                 setInterpolator(
                                     new CAAT.Interpolator().createCubicBezierInterpolator(
                                         {x:0,y:0},
                                         {x:1,y:0},
                                         {x:0,y:1},
                                         {x:1,y:1},
-                                        true ) ).
-                                setAnchor( CAAT.Actor.prototype.ANCHOR_TOP )
+                                        true ) )
                     );
             scene.addChild(cc1);
 
@@ -342,12 +341,9 @@
                     calcTextSize(director).
                     setTextAlign("center").
                     setFillStyle(gradient).
-                    setOutline(true);
-            text.setLocation((cc1.width-text.width)/2,0);
-            var aimg= new CAAT.ImageActor().create().
-                    setImage(text.cacheAsBitmap()).
-                    setLocation((cc1.width-text.textWidth)/2,0);
-            cc1.addChild(aimg);
+                    setOutline(true).
+                    cacheAsBitmap();
+            cc1.addChild(text.setLocation((cc1.width-text.width)/2,0));
 
             var text2= new CAAT.TextActor().
                     setFont("30px sans-serif").
@@ -355,13 +351,9 @@
                     setText("Collision detection").
                     calcTextSize(director).
                     setFillStyle(gradient).
-                    setOutline(true);
-            text2.setLocation((cc1.width-text2.width)/2,30);
-            var aimg2= new CAAT.ImageActor().create().
-                    setImage(text2.cacheAsBitmap()).
-                    setLocation((cc1.width-text2.textWidth)/2,30);
-            cc1.addChild(aimg2);
-
+                    setOutline(true).
+                    cacheAsBitmap();
+            cc1.addChild(text2.setLocation((cc1.width-text2.width)/2,30));
 
             var text3= new CAAT.TextActor().
                     setFont("30px sans-serif").
@@ -369,13 +361,9 @@
                     setText("Drag Enabled").
                     calcTextSize(director).
                     setFillStyle(gradient).
-                    setOutline(true);
-            text3.setLocation((cc1.width-text3.width)/2,60);
-            var aimg3= new CAAT.ImageActor().create().
-                    setImage(text3.cacheAsBitmap()).
-                    setLocation((cc1.width-text3.textWidth)/2,60);
-            cc1.addChild(aimg3);
-
+                    setOutline(true).
+                    cacheAsBitmap();
+            cc1.addChild(text3.setLocation((cc1.width-text3.width)/2,60));
 
             var text4= new CAAT.TextActor().
                     setFont("20px sans-serif").
@@ -383,13 +371,9 @@
                     setText("Drag + [Control,Shift,Alt]").
                     calcTextSize(director).
                     setFillStyle('black').
-                    setOutline(true);
-            text4.setLocation((cc1.width-text4.width)/2,100);
-            var aimg4= new CAAT.ImageActor().create().
-                    setImage(text4.cacheAsBitmap()).
-                    setLocation((cc1.width-text4.textWidth)/2,100);
-            cc1.addChild(aimg4);
-
+                    setOutline(true).
+                    cacheAsBitmap();
+            cc1.addChild(text4.setLocation((cc1.width-text4.width)/2,100));
 
             var text5= new CAAT.TextActor().
                     setFont("20px sans-serif").
@@ -397,12 +381,9 @@
                     setText("Double Click").
                     calcTextSize(director).
                     setFillStyle('black').
-                    setOutline(true);
-            text5.setLocation((cc1.width-text5.width)/2,120);
-            var aimg5= new CAAT.ImageActor().create().
-                    setImage(text5.cacheAsBitmap()).
-                    setLocation((cc1.width-text5.textWidth)/2,120);
-            cc1.addChild(aimg5);
+                    setOutline(true).
+                    cacheAsBitmap();
+            cc1.addChild(text5.setLocation((cc1.width-text5.width)/2,120));
 
             return scene;
         }

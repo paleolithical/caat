@@ -146,13 +146,10 @@
             gradient.addColorStop(1,'#00007f');
 
             var gr= new CAAT.ActorContainer().
-                    create().
                     setBounds(0,0,director.width,director.height).
                     setFillStyle(gradient).
-                    enableEvents(false);
-
-            var ac= new CAAT.ImageActor().create().
-                    setImage( gr.cacheAsBitmap(0) );
+                    enableEvents(false).
+                    cacheAsBitmap();
 
             for( var i=0; i<NP; i++ ) {
 
@@ -202,17 +199,16 @@
                             });
 
                 var f= new CAAT.Fish().
-                        create().
                         setBounds(300,400,fw,fh).
                         born().
                         setFrameTime( scene.time+inTime, Number.MAX_VALUE ).
                         setBodyColor(colors[i%colors.length]);
 
                 f.addBehavior(pb);
-                ac.addChild(f);
+                gr.addChild(f);
             }
 
-            scene.addChild(ac);
+            scene.addChild(gr);
 
         }
 

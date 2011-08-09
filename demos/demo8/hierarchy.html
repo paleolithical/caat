@@ -135,7 +135,7 @@
                 false);
 
         function __createShape(w, h) {
-            return new CAAT.ShapeActor().create().setShape(CAAT.ShapeActor.prototype.SHAPE_CIRCLE).setSize(w, h);
+            return new CAAT.ShapeActor().setShape(CAAT.ShapeActor.prototype.SHAPE_CIRCLE).setSize(w, h);
         }
 
         function __addPlanet(parent, rotationTime, pos, radius, color, startAngle) {
@@ -151,7 +151,7 @@
                             setFrameTime(0, rotationTime).
                             setValues(0, 2 * Math.PI).
                             setCycle(true).
-                            setAnchor(CAAT.Actor.prototype.ANCHOR_CUSTOM, -x, -y)
+                            setAnchor( planet, -x, -y )
                     );
 
             parent.addChild(planet);
@@ -218,7 +218,6 @@
 
             __scene8_text(director, scene);
 
-
             return scene;
         }
 
@@ -236,11 +235,11 @@
                     new CAAT.RotateBehavior().
                             setCycle(true).
                             setFrameTime(0, 4000).
-                            setValues(-Math.PI / 8, Math.PI / 8).
+                            setValues(-Math.PI / 8, Math.PI / 8, 50, 0).
                             setInterpolator(
-                            new CAAT.Interpolator().createExponentialInOutInterpolator(3, true)
-                            ).
-                            setAnchor(CAAT.Actor.prototype.ANCHOR_TOP)
+                                new CAAT.Interpolator().
+                                        createExponentialInOutInterpolator(3, true)
+                            )
                     );
             scene.addChild(cc);
 
@@ -250,13 +249,9 @@
                     create().
                     setFillStyle(gradient).
                     setOutline(true).
-                    calcTextSize(director);
-            text.setLocation((cc.width - text.width) / 2, 0);
-            var aimg = new CAAT.ImageActor().create().
-                    setImage(text.cacheAsBitmap()).
-                    setLocation((cc.width - text.textWidth) / 2, 0);
-            cc.addChild(aimg);
-
+                    calcTextSize(director).
+                    cacheAsBitmap();
+            cc.addChild(text.setLocation((cc.width - text.width) / 2, 0));
 
             var text2 = new CAAT.TextActor().
                     setFont("50px sans-serif").
@@ -264,18 +259,10 @@
                     calcTextSize(director).
                     create().
                     setFillStyle(gradient).
-                    setOutline(true);
-            text2.setLocation((cc.width - text2.width) / 2, 50);
-            var aimg2 = new CAAT.ImageActor().create().
-                    setImage(text2.cacheAsBitmap()).
-                    setLocation((cc.width - text2.textWidth) / 2, 50);
-            cc.addChild(aimg2);
-
-
-            scene.addChild(cc);
+                    setOutline(true).
+                    cacheAsBitmap();
+            cc.addChild(text2.setLocation((cc.width - text2.width) / 2, 50));
         }
-
-
 
     })();
 </script>
