@@ -81,3 +81,7 @@ a:hover {
     background: #55f;
     color: #fff;
 }
+
+#menu .indented {
+    text-indent: 15px; !important;
+}

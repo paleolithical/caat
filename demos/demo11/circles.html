@@ -15,7 +15,8 @@
   })();
 
 </script>
-    <title>CAAT example: Procedural Actors, The Fishpond</title>
+
+    <title>CAAT example: Packed Circle - Collision detection</title>
 
     <link rel="stylesheet" href="../style/demo.css">
 
@@ -42,7 +43,7 @@
 
             <h1>Demos</h1>
             <ul>
-                <li><a href="../demo1/path.html">Path Management</a></li>
+                <li><a href="../demo1/path.html">Path management</a></li>
                 <li><a href="../demo2/fishpond.html">Fish Pond</a></li>
                 <li><a href="../demo3/sprites.html">Sprites on Path</a></li>
                 <li><a href="../demo4/coordinates.html">Drag'n'Drop</a></li>
@@ -63,21 +64,24 @@
         </div>
         <div id="experiment">
             <div style="text-align:center">
-                <h1>Procedural Fish Pond</h1>
+                <h1>Packed Circle Collision Detection </h1>
             </div>
             <div id="experiment-holder">
             </div>
             <div id="experiment-description">
                 <div>
+                    <p>Controls:</p>
+                    <ul>
+                        <li>Move your mouse over the experiment.</li>
+                    </ul>
+                </div>
+                <div>
                     <p>
                         This demo features the following elements:
                     </p>
                     <ul>
-                        <li>Path Behaviors.</li>
-                        <li>Path Behavior lifecycle.</li>
-                        <li>Gradient optimization by caching it as bitmap.</li>
-                        <li>Generating procedural Actors</li>
-                        <li>Avoid erasing the background since it's going to be overwritten by the background.</li>
+                        <li>Usage of collision circular detection module.</li>
+                        <li>Built-in color utils usage.</li>
                     </ul>
                 </div>
             </div>
@@ -89,7 +93,8 @@
 
 <script type="text/javascript" src="../../lib/caat.js"></script>
 <script type="text/javascript" src="../../templates/startup-wo-splash/template.js"></script>
-<script type="text/javascript" src="fish.js"></script>
+<script type="text/javascript" src="circles.js"></script>
+
 <script type="text/javascript">
     /**
      * @license
@@ -116,7 +121,6 @@
      * THE SOFTWARE.
      *
      */
-
     (function() {
         /**
          * Startup it all up when the document is ready.
@@ -128,95 +132,20 @@
                     CAAT.modules.initialization.init(
                             800, 500,
                             'experiment-holder',
-                            [],
-                            __fishpond
+                            [],                   // no-images
+                            __scene1
                             );
                 },
                 false);
 
-
-        function __fishpond(director) {
-
-            var scene= director.createScene();
-
-            // when the scene is activated, avoid the director clearing the viewport since it'll be
-            // totally erased by the background.
-            scene.activated= function() {
-                director.setClear(false);
-            }
-            var NP=20;
-            var colors= ['red', 'blue', 'white', 'rgb(0,255,255)', 'yellow'];
-            var gradient= director.crc.createLinearGradient(0,0,director.width,director.height);
-            gradient.addColorStop(0,'#000000');
-            gradient.addColorStop(1,'#00007f');
-
-            var gr= new CAAT.ActorContainer().
-                    setBounds(0,0,director.width,director.height).
-                    setFillStyle(gradient).
-                    enableEvents(false).
-                    cacheAsBitmap();
-
-            for( var i=0; i<NP; i++ ) {
-
-                var fw= (100 + Math.random()*40*(Math.random()<.5?1:-1))>>0;
-                var fh= (20+ Math.random()*5*(Math.random()<.5?1:-1))>>0;
-
-                var inTime= i*1000;
-
-                var pb = new CAAT.PathBehavior().
-                        setPath(new CAAT.Path().setCubic(
-                        -fw - Math.random() * 300,
-                        Math.random() * director.height,
-
-                        director.width * Math.random(),
-                        Math.random() * director.height,
-
-                        director.width * Math.random(),
-                        Math.random() * director.height,
-
-                        Math.random() < .5 ? director.width + fw + Math.random() * 150 : Math.random() * director.width,
-                        Math.random() < .5 ? -director.height * Math.random() - 300 : director.height + Math.random() * director.height
-                        )).
-                        setFrameTime(scene.time + inTime, (20000 + 5000 * Math.random()) >> 0).
-                        setCycle(true).
-                        setAutoRotate(true).
-                        addListener({
-                                behaviorExpired : function(behavior, time, actor) {
-                                    behavior.path.setCubic(
-                                            -fw - Math.random() * 300,
-                                            Math.random() * director.height,
-
-                                            director.width * Math.random(),
-                                            -Math.random() * director.height / 2 + Math.random() * director.height,
-
-                                            director.width * Math.random(),
-                                            -Math.random() * director.height / 2 + Math.random() * director.height,
-
-                                            Math.random() < .5 ? director.width + fw + Math.random() * 150 : Math.random() * director.width,
-                                            Math.random() < .5 ? -director.height * Math.random() - 300 : director.height + Math.random() * director.height
-                                            );
-                                    behavior.setFrameTime(scene.time, (20000 + 5000 * Math.random()) >> 0);
-                                    actor.born();
-                                },
-                                behaviorApplied : function(actor, time, normalizedTime, value) {
-
-                                }
-                            });
-
-                var f= new CAAT.Fish().
-                        setBounds(300,400,fw,fh).
-                        born().
-                        setFrameTime( scene.time+inTime, Number.MAX_VALUE ).
-                        setBodyColor(colors[i%colors.length]);
-
-                f.addBehavior(pb);
-                gr.addChild(f);
-            }
-
-            scene.addChild(gr);
-
+        function __scene1(director) {
+            __scene10(director);
         }
 
     })();
+
+
 </script>
+
+
 </html>
