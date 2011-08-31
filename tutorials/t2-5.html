@@ -1,29 +1,53 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-        "http://www.w3.org/TR/html4/loose.dtd">
+<!doctype html>
 <html>
 <head>
-    <title>CAAT Tutorial 2- Actor Behaviors</title>
+    <meta charset="UTF-8">
+    <title>CAAT Tutorial 2- Actor Background Image</title>
 
-<script type="text/javascript" src="sh/shCore.js"></script>
-<script type="text/javascript" src="sh/shBrushJScript.js"></script>
-<link href="sh/shCore.css" rel="stylesheet" type="text/css" />
-<link href="sh/shThemeDefault.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="sh/shCore.js"></script>
+    <script type="text/javascript" src="sh/shBrushJScript.js"></script>
+    <link href="sh/shCore.css" rel="stylesheet" type="text/css"/>
+    <link href="sh/shThemeDefault.css" rel="stylesheet" type="text/css"/>
 
-    <link rel="stylesheet" href="style/tut.css">
+    <script type="text/javascript" src="menu/menu.js"></script>
     <script type="text/javascript" src="../lib/caat.js"></script>
+
     <script type="text/javascript">
-         SyntaxHighlighter.all()
+        SyntaxHighlighter.all()
     </script>
 
+    <link rel="stylesheet" href="style/demo.css">
+
+
 </head>
-<body>
+
+
+<body style="color:black; background:#ffffff;">
+
+<div id="page">
+    <div id="header">
+        <div style="text-align: center;">
+
+        </div>
+    </div>
+
+    <div id="content">
+        <div id="menu">
+
+        </div>
+        <div id="tutorial">
+
+
+
 <div class="chapter">
     <h1>CAAT.Actor</h1>
     <h2>Background Images</h2>
     <p>
         An actor instance now can have a background image. Initially this feature was delegated to Image or Sprite
         actor instances but in order to allow css rendering, it had to be implemented back into
-        <span class="apicode">CAAT.Actor</span> instances.
+        <span class="apicode">CAAT.Actor</span> instances. <span class="apicode">CAAT.ImageActor</span> and
+        <span class="apicode">CAAT.SpriteActor</span> classes are still
+        valid but if fully CSS compatibility is pursued, they should not be used.
     </p>
     <p>
         In order to set the background image, the method
@@ -254,5 +278,9 @@
     </script>
 </div>
 
+
+        </div>
+    </div>
+</div>
 </body>
 </html>

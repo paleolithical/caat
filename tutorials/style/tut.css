@@ -1,16 +1,3 @@
-body {
-    font-family: "'Lucida Grande'", sans-serif  
-}
-
-a {
-    text-decoration: none;
-}
-
-a:hover {
-    background: #aaf;
-    color:      #fff;
-}
-
 .important {
     padding:        0 5px;
     border:         1px;
@@ -20,10 +7,6 @@ a:hover {
     font-family:    monospace;
     font-size:      1em;
     font-weight:    bold;
-}
-
-.code {
-    font-size:      .7em;
 }
 
 .apicode {

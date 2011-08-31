@@ -1,16 +1,49 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-        "http://www.w3.org/TR/html4/loose.dtd">
+
+<!doctype html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>CAAT Tutorial 2 - Actors</title>
-    <link rel="stylesheet" href="style/tut.css">
+
+    <script type="text/javascript" src="sh/shCore.js"></script>
+    <script type="text/javascript" src="sh/shBrushJScript.js"></script>
+    <link href="sh/shCore.css" rel="stylesheet" type="text/css"/>
+    <link href="sh/shThemeDefault.css" rel="stylesheet" type="text/css"/>
+
+    <script type="text/javascript" src="menu/menu.js"></script>
+    <script type="text/javascript" src="../lib/caat.js"></script>
+
+    <script type="text/javascript">
+        SyntaxHighlighter.all()
+    </script>
+
+    <link rel="stylesheet" href="style/demo.css">
+
+
 </head>
-<body>
+
+
+<body style="color:black; background:#ffffff;">
+
+<div id="page">
+    <div id="header">
+        <div style="text-align: center;">
+
+        </div>
+    </div>
+
+    <div id="content">
+        <div id="menu">
+
+        </div>
+        <div id="tutorial">
+
+
 
 <div class="section">
     <h1>CAAT.Actor</h1>
     <p>CAAT.Actor is the simplest object instance that CAAT is able to manage. Every on-screen element is an Actor.
-        In fact, the Director and the Scene objects are an kind of Actor.</p>
+        In fact, the Director and the Scene objects are a kind of CAAT.Actor instance as well.</p>
     <p>This object class contains default functionality for:</p>
     <ol>
         <li>Set location and size on screen. Actors are always rectangular shapes, but not needed to be AABB.</li>
@@ -36,7 +69,7 @@
         <li>...</li>
     </ul>
     <p>but as you'll see, developing a new breed of Actors will be just a few lines of code.</p>
-    
+
 
     <p>One important fact about Actors is the coordinate system. An Actor will always report local coordinates
     despite the transformation applied to it. In example, an Actor can be scaled twice widely, and rotated
@@ -58,15 +91,17 @@
         <a href="t2-3.html">Transformations</a><br>
         <a href="t2-4.html">Behaviors</a><br>
         <a href="t2-5.html">Background Image</a><br>
-
-        <a href="#">Paint method</a><br>
-        <a href="#">Caching</a><br>
-        <a href="#">Container</a><br>
-        <a href="#">Scene</a><br>
-        <a href="#">Director</a><br>
-    
-
+        <a href="t2-6.html">Paint method</a><br>
+        <a href="t2-7.html">Caching</a><br>
+    </p>
 </div>
 
+
+        </div>
+    </div>
+</div>
 </body>
 </html>
+
+
+

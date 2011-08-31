@@ -17,23 +17,10 @@ h1 {
     width: 950px;
 }
 
-#page-tutorial {
-    margin: 0 auto;
-    position: relative;
-    width: 970px;
-}
-
-
 #header {
     height: 10px;
     width: 950px;
 }
-
-#header-tutorial {
-    height: 10px;
-    width: 970px;
-}
-
 
 #experiment h1 {
  font:normal 16pt Arial;
@@ -57,34 +44,14 @@ h1 {
 
 #content #menu {
     float: left;
-    width: 130px;
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
-#content #menu-tutorial {
-    float: left;
     width: 150px;
     padding-left: 10px;
     padding-right: 10px;
 }
 
-
-#content #experiment {
-    float: left;
-    width: 800px;
-}
-
-#content #experiment #experiment-holder {
-    width: 800px;
-    margin: 0 auto;
-    padding: 0;
-    border: 1px solid #000;
-}
-
 #content #tutorial {
     float: left;
-    width: 800px;
+    width: 780px;
 }
 
 #menu ul {
@@ -110,4 +77,29 @@ a:hover {
 
 #menu .indented {
     text-indent: 15px; !important;
+}
+
+.important {
+    padding:        0 5px;
+    border:         1px;
+    border-style:   solid;
+    background:     #ffd;
+    color:          #000;
+    font-family:    monospace;
+    font-size:      1em;
+    font-weight:    bold;
+}
+
+.apicode {
+    padding:        0 5px;
+    border:         1px;
+    border-style:   solid;
+    background:     #eee;
+    color:          #000;
+    font-family:    monospace;
+    font-size:      1.1em;
+}
+
+.sample {
+    margin: 0 auto;
 }
