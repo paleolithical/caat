@@ -1,15 +1,28 @@
 body {
+  background: #333 url(../resource/body_bg.jpg) repeat 50% 0;
+  color: #fff;
+  font-family: "Oswald", Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.2em;
+
     margin:     0;
     padding:    0;
-    background: #fff;
-    font-family: 'Lucida Grande', Geneva;
-    font-size:  12px;
 }
 
 h1 {
     border-bottom: 1px solid #888;
+    color: #ffd;
     line-height: 1.5em;
 }
+
+h2 {
+    color: #ffd;
+}
+
+h3 {
+    color: #ffd;
+}
+
 
 #page {
     margin: 0 auto;
@@ -67,7 +80,7 @@ h1 {
 
 a {
     text-decoration: none;
-    color: #55f;
+    color: #f73;
 }
 
 a:hover {

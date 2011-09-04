@@ -36,7 +36,7 @@
 </head>
 
 
-<body style="color:black; background:#ffffff;">
+<body>
 
 <div id="page">
     <div id="header">
@@ -87,10 +87,12 @@
 
                 function __scene(director) {
 
+                function __scene(director) {
+
                     var scene= director.createScene();
 
                     var cc1 = new CAAT.ActorContainer().
-                            setBounds(0, 50, 300, 200).
+                            setBounds(0, 100, 700, 300).
                             create().
                             enableEvents(false);
                     scene.addChild(cc1);
@@ -104,57 +106,61 @@
                                     new CAAT.Interpolator().createExponentialInOutInterpolator(3, true))
                             );
 
-                    var gradient = director.crc.createLinearGradient(0, 0, 0, 30);
+                    var gradient = director.crc.createLinearGradient(0, 0, 0, 50);
                     gradient.addColorStop(0, '#00ff00');
                     gradient.addColorStop(0.5, 'red');
                     gradient.addColorStop(1, 'blue');
 
                     var text = new CAAT.TextActor().
-                            setFont("20px sans-serif").
+                            setFont("50px sans-serif").
                             setText("Conpound Path").
                             calcTextSize(director).
                             setAlign("center").
                             setFillStyle(gradient).
                             setOutline(true).
+                            setOutlineColor('white').
                             cacheAsBitmap();
                     cc1.addChild(text.setLocation((cc1.width - text.textWidth) / 2, 0));
 
                     var text2 = new CAAT.TextActor().
-                            setFont("20px sans-serif").
+                            setFont("50px sans-serif").
                             setText("Quadric,Cubic,Line segments").
                             calcTextSize(director).
                             setAlign("center").
                             setFillStyle(gradient).
                             setOutline(true).
+                            setOutlineColor('white').
                             cacheAsBitmap();
-                    cc1.addChild(text2.setLocation((cc1.width - text2.textWidth) / 2, 20));
+                    cc1.addChild(text2.setLocation((cc1.width - text2.textWidth) / 2, 50));
 
                     var text4 = new CAAT.TextActor().
-                            setFont("20px sans-serif").
+                            setFont("50px sans-serif").
                             setText("Fish path").
                             calcTextSize(director).
                             setAlign("center").
                             setFillStyle(gradient).
                             setOutline(true).
+                            setOutlineColor('white').
                             cacheAsBitmap();
-                    cc1.addChild( text4.setLocation((cc1.width - text4.textWidth) / 2, 50) );
+                    cc1.addChild( text4.setLocation((cc1.width - text4.textWidth) / 2, 100) );
 
                     var text3 = new CAAT.TextActor().
-                            setFont("20px sans-serif").
+                            setFont("50px sans-serif").
                             setText("Interpolators").
                             calcTextSize(director).
                             setAlign("center").
                             setFillStyle(gradient).
                             setOutline(true).
+                            setOutlineColor('white').
                             cacheAsBitmap();
-                    cc1.addChild(text3.setLocation((cc1.width - text3.textWidth) / 2, 70));
+                    cc1.addChild(text3.setLocation((cc1.width - text3.textWidth) / 2, 150));
 
                 }
 
                 function __init()   {
 
                     var director = new CAAT.Director().
-                            initialize(300,300, document.getElementById('_c1'));
+                            initialize(700,500, document.getElementById('_c1'));
 
                     __scene(director);
 
@@ -162,6 +168,7 @@
                 }
 
                 __init();
+
 
 
             </pre>
@@ -175,7 +182,7 @@
                     var scene= director.createScene();
 
                     var cc1 = new CAAT.ActorContainer().
-                            setBounds(0, 50, 300, 200).
+                            setBounds(0, 100, 700, 300).
                             create().
                             enableEvents(false);
                     scene.addChild(cc1);
@@ -189,57 +196,61 @@
                                     new CAAT.Interpolator().createExponentialInOutInterpolator(3, true))
                             );
 
-                    var gradient = director.crc.createLinearGradient(0, 0, 0, 30);
+                    var gradient = director.crc.createLinearGradient(0, 0, 0, 50);
                     gradient.addColorStop(0, '#00ff00');
                     gradient.addColorStop(0.5, 'red');
                     gradient.addColorStop(1, 'blue');
 
                     var text = new CAAT.TextActor().
-                            setFont("20px sans-serif").
+                            setFont("50px sans-serif").
                             setText("Conpound Path").
                             calcTextSize(director).
                             setAlign("center").
                             setFillStyle(gradient).
                             setOutline(true).
+                            setOutlineColor('white').
                             cacheAsBitmap();
                     cc1.addChild(text.setLocation((cc1.width - text.textWidth) / 2, 0));
 
                     var text2 = new CAAT.TextActor().
-                            setFont("20px sans-serif").
+                            setFont("50px sans-serif").
                             setText("Quadric,Cubic,Line segments").
                             calcTextSize(director).
                             setAlign("center").
                             setFillStyle(gradient).
                             setOutline(true).
+                            setOutlineColor('white').
                             cacheAsBitmap();
-                    cc1.addChild(text2.setLocation((cc1.width - text2.textWidth) / 2, 20));
+                    cc1.addChild(text2.setLocation((cc1.width - text2.textWidth) / 2, 50));
 
                     var text4 = new CAAT.TextActor().
-                            setFont("20px sans-serif").
+                            setFont("50px sans-serif").
                             setText("Fish path").
                             calcTextSize(director).
                             setAlign("center").
                             setFillStyle(gradient).
                             setOutline(true).
+                            setOutlineColor('white').
                             cacheAsBitmap();
-                    cc1.addChild( text4.setLocation((cc1.width - text4.textWidth) / 2, 50) );
+                    cc1.addChild( text4.setLocation((cc1.width - text4.textWidth) / 2, 100) );
 
                     var text3 = new CAAT.TextActor().
-                            setFont("20px sans-serif").
+                            setFont("50px sans-serif").
                             setText("Interpolators").
                             calcTextSize(director).
                             setAlign("center").
                             setFillStyle(gradient).
                             setOutline(true).
+                            setOutlineColor('white').
                             cacheAsBitmap();
-                    cc1.addChild(text3.setLocation((cc1.width - text3.textWidth) / 2, 70));
+                    cc1.addChild(text3.setLocation((cc1.width - text3.textWidth) / 2, 150));
 
                 }
 
                 function __init()   {
 
                     var director = new CAAT.Director().
-                            initialize(300,300, document.getElementById('_c1'));
+                            initialize(700,500, document.getElementById('_c1'));
 
                     __scene(director);
 

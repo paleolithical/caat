@@ -37,7 +37,7 @@
 </head>
 
 
-<body style="color:black; background:#ffffff;">
+<body>
 
 <div id="page">
     <div id="header">
@@ -121,6 +121,11 @@
         The following example shows the creation of actors on mousemove over a container. Every of this new
         actors has an spriteImage instance of a single stars image which is reused among every star actor instance.
     </p>
+    <p>
+        The image used in this code is the following: <img src="../demos/demo-resources/img/stars.png">,
+        so setting a SpriteImage of one row by six columns will treat each image's piece as an
+        independent star.
+    </p>
     <div class="code">
         <pre class="brush: js; auto-links: false; toolbar: false;">
             function __scene(director) {
@@ -145,7 +150,7 @@
                         // set background image to be a reference of a SpriteImage instance
                         // and set actor's size equal to a SpriteImage's subimage size
                             setBackgroundImage(
-                                starsImage.getRef().setAnimationImageIndex( [(Math.random()*6)>>0] ), true ).
+                                starsImage.getRef(), true ).
                         // set background as a random SpriteImage's subimage.
                             setSpriteIndex( (Math.random()*6)>>0 ).
                         // center the actor on mouse position
@@ -230,7 +235,7 @@
                         // set background image to be a reference of a SpriteImage instance
                         // and set actor's size equal to a SpriteImage's subimage size
                             setBackgroundImage(
-                                starsImage.getRef().setAnimationImageIndex( [(Math.random()*6)>>0] ), true ).
+                                starsImage.getRef(), true ).
                         // set background as a random SpriteImage's subimage.
                             setSpriteIndex( (Math.random()*6)>>0 ).
                         // center the actor on mouse position

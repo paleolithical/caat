@@ -3,15 +3,18 @@
 <head>
     <script type="text/javascript">
 
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-17485141-1']);
-      _gaq.push(['_trackPageview']);
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-17485141-1']);
+        _gaq.push(['_trackPageview']);
 
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
+        (function() {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
 
     </script>
 
@@ -36,7 +39,7 @@
 </head>
 
 
-<body style="color:black; background:#ffffff;">
+<body>
 
 <div id="page">
     <div id="header">
@@ -51,6 +54,7 @@
         </div>
         <div id="tutorial">
             <h1>Director</h1>
+
             <h2>Accelerometer Events</h2>
 
             <p>
@@ -59,16 +63,137 @@
                 vales, are directly accesible from CAAT's environment and will only work on
                 FF3+ or Chrome.
             </p>
+
             <p>
                 Accelerometer angle values can be accesed via
-                <div class="code">
+
+            <div class="code">
                     <pre class="brush: js; auto-links: false; toolbar: false;">
                         CAAT.rotationRate.alpha
                         CAAT.rotationRate.beta
                         CAAT.rotationRate.gamma
                     </pre>
-                </div>
+            </div>
             </p>
+            <div>
+                <h2>Example</h2>
+
+                <p>
+                    In this example, when moving your laptop, the text will rotate to be readable
+                    horizontally. It will only work on FF3+ and Chrome.
+                </p>
+
+                <div>
+                    <canvas id="_c"></canvas>
+                </div>
+                <div class="code">
+                    <pre class="brush: js; auto-links: false; toolbar: false;">
+    var CW= 700;
+            var CH= 400;
+            /**
+             * Startup it all up when the document is ready.
+             * Change for your favorite frameworks initialization code.
+             */
+            window.addEventListener(
+                    'load',
+                    __accelerometer,
+                    false);
+
+            function __accelerometer(director) {
+
+                var director= new CAAT.Director().
+                        initialize(CW,CH,document.getElementById('_c'));
+                var i;
+                var scene = director.createScene();
+
+                scene.activated= function() {
+                    director.setClear(false);
+                };
+
+                var root= new CAAT.ActorContainer().setBounds(0,0,director.width,director.height);
+                scene.addChild(root);
+
+                var text = new CAAT.TextActor().
+                        setFont("100px sans-serif").
+                        setText("Rotate Device").
+                        create().
+                        setFillStyle('red').
+                        setOutlineColor('#ffff00').
+                        setOutline(true).
+                        calcTextSize(director).
+                        cacheAsBitmap();
+                scene.addChild(text.setLocation((director.canvas.width - text.width) / 2,
+                        (director.canvas.height - text.height) / 2) );
+
+            // Hook on scene life cycle. After rendering, calculate an angle based on accelerometer
+            // information for the text.
+                scene.onRenderEnd = function(director, time) {
+                    var rx = CAAT.rotationRate.gamma;
+
+                    var ixy= -rx * Math.PI / 180;
+                    text.setRotation(ixy);
+                };
+
+                CAAT.loop(33);
+            }
+                    </pre>
+                </div>
+
+                <script>
+                    (function() {
+
+                        var CW = 700;
+                        var CH = 400;
+                        /**
+                         * Startup it all up when the document is ready.
+                         * Change for your favorite frameworks initialization code.
+                         */
+                        window.addEventListener(
+                                'load',
+                                __accelerometer,
+                                false);
+
+                        function __accelerometer(director) {
+
+                            var director = new CAAT.Director().
+                                    initialize(CW, CH, document.getElementById('_c'));
+                            var i;
+                            var scene = director.createScene();
+
+                            scene.activated = function() {
+                                director.setClear(false);
+                            };
+
+                            var root = new CAAT.ActorContainer().setBounds(0, 0, director.width, director.height);
+                            scene.addChild(root);
+
+                            var text = new CAAT.TextActor().
+                                    setFont("100px sans-serif").
+                                    setText("Rotate Device").
+                                    create().
+                                    setFillStyle('red').
+                                    setOutlineColor('#ffff00').
+                                    setOutline(true).
+                                    calcTextSize(director).
+                                    cacheAsBitmap();
+                            scene.addChild(text.setLocation((director.canvas.width - text.width) / 2,
+                                    (director.canvas.height - text.height) / 2));
+
+                            // Hook on scene life cycle. After rendering, calculate an angle based on accelerometer
+                            // information for the text.
+                            scene.onRenderEnd = function(director, time) {
+                                var rx = CAAT.rotationRate.gamma;
+
+                                var ixy = -rx * Math.PI / 180;
+                                text.setRotation(ixy);
+                            };
+
+                            CAAT.loop(33);
+                        }
+
+                    })();
+                </script>
+            </div>
         </div>
     </div>
 </div>
