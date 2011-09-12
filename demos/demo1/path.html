@@ -150,16 +150,15 @@
             for (j = 0; j < rows; j++) {
 
                 var root = new CAAT.Dock().
-                        create().
+                        initialize(scene).
                         setBounds(
-                        director.canvas.width - (j + 1) * max,
-                        0,
-                        max,
-                        director.canvas.height).
+                            director.canvas.width - (j + 1) * max,
+                            0,
+                            max,
+                            director.canvas.height).
                         setSizes(min, max).
                         setApplicationRange(3).
                         setLayoutOp(CAAT.Dock.prototype.OP_LAYOUT_RIGHT);
-                root.scene = scene;
 
                 scene.addChild(root);
 

@@ -21,10 +21,10 @@
   background-color: white !important;
 }
 .syntaxhighlighter .line.alt2 {
-  background-color: white !important;
+  background-color: #f7f7f7 !important;
 }
 .syntaxhighlighter .line.highlighted.alt1, .syntaxhighlighter .line.highlighted.alt2 {
-  background-color: #e0e0e0 !important;
+  background-color: #e0e000 !important;
 }
 .syntaxhighlighter .line.highlighted.number {
   color: black !important;

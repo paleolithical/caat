@@ -9,6 +9,12 @@ body {
     padding:    0;
 }
 
+.tlogo {
+    background: url(../resource/logo.png) no-repeat;
+    width: 140px;
+    height: 82px;
+}
+
 h1 {
     border-bottom: 1px solid #888;
     color: #ffd;

@@ -69,9 +69,10 @@
                 var director= new CAAT.Director().initialize(
                         800,
                         600,
-                        document.getElementById('_sample'));
+                        document.getElementById('_sample')).
+                        setClear(false);
 
-                var scene= director.createScene();
+                var scene= director.createScene().setFillStyle('fff');
 
                 var lerps= CAAT.Interpolator.prototype.enumerateInterpolators();
 
@@ -102,7 +103,8 @@
                         var actor= new CAAT.InterpolatorActor().
                              setInterpolator( lerps[(j*cols+i)*2] ).
                              setBounds( 0, 0, min, min ).
-                             setStrokeStyle('white');
+                             setFillStyle('#fff').
+                             setStrokeStyle( '#000' );
                         if ( !i && !j ) {
                             actor.setFillStyle('#373');
                             selectedInterpolatorActor= actor;
@@ -200,7 +202,7 @@
                 for( i=0; i<3; i++ ) {
                     var _text_r0= new CAAT.ShapeActor().
                             setShape( CAAT.ShapeActor.prototype.SHAPE_CIRCLE ).
-                            setFillStyle('white').
+                            setFillStyle('red').
                             setStrokeStyle('orange').
                             setBounds( 470,60+130*i, 80, 80 );
                     var text_r0_rb= new CAAT.AlphaBehavior().
