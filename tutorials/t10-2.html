@@ -124,21 +124,37 @@
                                         var scene= director.createScene().setFillStyle('red');
                                         director.setImagesCache(images);
                                         var img= director.getImage('b');
+                                        var x,y;
 
+                                        x= (director.width-img.width)/2;
+                                        y= 10;
+                                        scene.addChild(
+                                                new CAAT.Actor().
+                                                        setFillStyle('blue').
+                                                        setBounds(x,y,img.width,img.height)
+
+                                        );
                                         scene.addChild(
                                                 new CAAT.Actor().
                                                         setBackgroundImage( img, true ).
-                                                        setLocation((director.width-img.width)/2, 10).
-                                                        setFillStyle('blue')
+                                                        setLocation(x,y)
                                         );
 
                                         var img2= new CAAT.modules.ImageUtil().optimize( img, 32 );
 
+                                        x= (director.width-img2.width)/2;
+                                        y= 10+img.height+10;
+
+                                        scene.addChild(
+                                                new CAAT.Actor().
+                                                        setFillStyle('blue').
+                                                        setBounds(x,y,img2.width,img2.height)
+
+                                        );
                                         scene.addChild(
                                                 new CAAT.Actor().
                                                         setBackgroundImage( img2, true ).
-                                                        setLocation((director.width-img2.width)/2, 10+img.height+10 ).
-                                                        setFillStyle('blue')
+                                                        setLocation(x,y )
                                         );
 
                                         CAAT.loop(1);
@@ -179,13 +195,25 @@
 
                                         scene.addChild(
                                                 new CAAT.Actor().
+                                                        setBounds((director.width-img.width)/2, 10, img.width, img.height).
+                                                        setFillStyle('blue')
+                                        );
+                                        scene.addChild(
+                                                new CAAT.Actor().
                                                         setBackgroundImage( img, true ).
                                                         setLocation((director.width-img.width)/2, 10).
                                                         setFillStyle('blue')
                                         );
 
+
+
                                         var img2= new CAAT.modules.ImageUtil().createThumb(
                                                 img, img.width/4, img.height/4 );
+                                        scene.addChild(
+                                                new CAAT.Actor().
+                                                        setBounds(50, 10+10+img.height, img2.width, img2.height).
+                                                        setFillStyle('blue')
+                                        );
                                         scene.addChild(
                                                 new CAAT.Actor().
                                                         setBackgroundImage( img2, true ).
@@ -193,8 +221,15 @@
                                                         setFillStyle('blue')
                                         );
 
+
+
                                         var img3= new CAAT.modules.ImageUtil().createThumb(
                                                 img, 64, 64 );
+                                        scene.addChild(
+                                                new CAAT.Actor().
+                                                        setBounds(220, 10+10+img.height, img3.width, img3.height).
+                                                        setFillStyle('blue')
+                                        );
                                         scene.addChild(
                                                 new CAAT.Actor().
                                                         setBackgroundImage( img3, true ).
@@ -202,8 +237,15 @@
                                                         setFillStyle('blue')
                                         );
 
+
+
                                         var img4= new CAAT.modules.ImageUtil().createThumb(
                                                 img, 64, 64, true );
+                                        scene.addChild(
+                                                new CAAT.Actor().
+                                                        setBounds(300, 10+10+img.height, img4.width, img4.height).
+                                                        setFillStyle('blue')
+                                        );
                                         scene.addChild(
                                                 new CAAT.Actor().
                                                         setBackgroundImage( img4, true ).
