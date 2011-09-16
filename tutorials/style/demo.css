@@ -98,6 +98,11 @@ a:hover {
     text-indent: 15px; !important;
 }
 
+#menu-index .indented {
+    text-indent: 15px; !important;
+}
+
+
 .important {
     padding:        0 5px;
     border:         1px;

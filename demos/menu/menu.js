@@ -38,6 +38,6 @@
         }
     }
 
-    loadXMLDoc();
+    window.addEventListener('load',loadXMLDoc,false);
     
 })();
