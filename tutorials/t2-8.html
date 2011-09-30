@@ -61,22 +61,82 @@
 
         <div>
             <p>
-                Clipping is by default disabled on CAAT. Enabling it results in slowe performance, so it
+                Clipping is by default disabled on CAAT. Enabling it results in slower performance, so it
                 must be treated carefully. It can be enabled globally by setting
                 <span class="apicode">CAAT.Actor.prototype.clip= true</span>.
 
             <p>
-                Optionally, the developer can enable/disable clipping for individual actors by settings
-                Actor's clip attribute to true or false or by calling the method <span class="apicode">
-                setClip(bool)</span>.
+                Optionally, the developer can enable/disable clipping for individual actors by
+                calling the method <span class="apicode">setClip(bool, path)</span>.
             </p>
+            <p>
+                Parameters for this method are:
+                <ul>
+                    <li>a boolean indicating whether clip is enabled.</li>
+                    <li>path. This parameter is optional. If not supplied, a rectangle equal
+                    to the actor size will be used as clipping area. If set, this parameter
+                    must be a CAAT.Path instance. This CAAT.Path can also have CAAT.Behavior
+                    objects applied. It will only honor ScaleBehavior, RotateBehavior and
+                    PathBehavior object instances, so that the mask can be rotating, scaling and
+                    translating all together.</li>
+                </ul>
+            </p>
+            <p>
+                The following sample code could be used to define a CAAT.Path instance as
+                clip area as well as adding some behaviors to the clipping mask.
+            </p>
+            <div class="code">
+                <pre class="brush: js; auto-links: false; toolbar: false;">
+
+            // define a path
+            var path =
+                        new CAAT.Path().
+                                beginPath(100, director.height / 2).
+                                addCubicTo(
+                                100, 10,
+                                director.width - 100, 10,
+                                director.width - 100, director.height / 2).
+                                addCubicTo(
+                                director.width - 100, director.height - 10,
+                                100, director.height - 10,
+                                100, director.height / 2).
+                                closePath();
+
+            // define another path instance to make the traverse traverse across.
+            var traversePath= new CAAT.Path()...;
+
+            // add to the mask a behavior to traverse the path,
+            path.addBehavior(
+                new CAAT.PathBehavior().
+                    setValues( traversePath ).
+                    setFrameTime( 0,15000 ).
+                    setCycle( true ).
+                    setTranslation( path2.width/2, path2.height/2 )
+            // and a rotation, so that it rotates while traversing.
+            ).addBehavior(
+                new CAAT.RotateBehavior().
+                    setValues( 0,Math.PI*2 ).
+                    setFrameTime( 0,5000 ).
+                    setCycle( true )
+            // add as much as needed.
+            ).addBehavior(
+                ...
+            );
+
+            // enable clip on a CAAT.Actor instance (container, button, whichever) with
+            // the given path shape as clip area.
+            actor.setClip( true, path );
+                </pre>
+            </div>
 
             <p>
-                The clip area will the actor's bounding box with all its transformations applied.
+                This method is a powerful feature which allow to set arbitrary paths as clippling
+                areas. See <a href="../demos/demo16/mask.html">this example</a> for a visual demo.
             </p>
             <p>
                 <span class="important">Clip will work only on canvas and DOM/CSS renderers</span>. I've still to implement the GL
-                scissors for the webGL renderer.
+                scissors for the webGL renderer. <span class="important">Arbitrary clip areas can
+                only be used on Canvas renderer</span>.
             </p>
         </div>
     </div>
@@ -94,6 +154,13 @@
             This is because of the way CAAT routes events to its Actors. <span class="important">In order to send an
             event to an Actor, the Actor must be contained into its parent area. Period.</span>
         </p>
+        <p>
+            It also defines an elliptical clip area on the scene.
+        </p>
+
+        <div>
+            <canvas id="_c5"></canvas>
+        </div>
 
         <div class="code">
             <pre class="brush: js; auto-links: false; toolbar: false;">
@@ -174,14 +241,30 @@
 
                     // add this container as a child of the previous created container.
                     _c5_container.addChild(_c5_container_child);
+
+                    );
+
+                    // set an elliptical clip area
+                    _scene_5.setClip(
+                        true,
+                        new CAAT.Path().
+                            beginPath(10,_director_5.height/2).
+                            addCubicTo(
+                                10,10,
+                                _director_5.width-10,10,
+                                _director_5.width-10,_director_5.height/2 ).
+                            addCubicTo(
+                                _director_5.width-10,_director_5.height-10,
+                                10, _director_5.height-10,
+                                10, _director_5.height/2 ).
+                            closePath()
+                    );
+
                 }
 
                 CAAT.loop(20);
 
             </pre>
-        </div>
-        <div>
-            <canvas id="_c5"></canvas>
         </div>
         <script>
             (function() {
@@ -263,6 +346,22 @@
                     // add this container as a child of the previous created container.
                     _c5_container.addChild(_c5_container_child);
                 }
+
+                _scene_5.setClip(
+                    true,
+                    new CAAT.Path().
+                        beginPath(10,_director_5.height/2).
+                        addCubicTo(
+                            10,10,
+                            _director_5.width-10,10,
+                            _director_5.width-10,_director_5.height/2 ).
+                        addCubicTo(
+                            _director_5.width-10,_director_5.height-10,
+                            10, _director_5.height-10,
+                            10, _director_5.height/2 ).
+                        closePath()
+                );
+
 
                 CAAT.loop(20);
             })();
