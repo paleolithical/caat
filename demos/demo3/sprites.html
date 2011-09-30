@@ -161,7 +161,7 @@
                 scene.addChild(fish);
 
                 var pbfish= new CAAT.PathBehavior().
-                        setAutoRotate(true).
+                        setAutoRotate(true, CAAT.PathBehavior.autorotate.LEFT_TO_RIGHT).
                         setPath(
                             new CAAT.Path().setLinear( x,y, x,y ) ).
                         setInterpolator(
